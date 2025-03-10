@@ -10,6 +10,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/user")
 public class AuthController {
+
     @Autowired
     private AuthService authService;
     @PostMapping("/register")

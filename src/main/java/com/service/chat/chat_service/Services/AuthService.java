@@ -11,19 +11,23 @@ import java.util.Optional;
 
 @Service
 public class AuthService {
+    private final PasswordEncoder passwordEncoder;
+
     @Autowired
-    private PasswordEncoder passwordEncoder;
+    public AuthService(PasswordEncoder passwordEncoder) {
+        this.passwordEncoder = passwordEncoder;
+    }
     @Autowired
     private UserRepo userRepo;
 
     public User register(User user){
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setRole(Role.ADMIN);
+        user.setRole(Role.USER);
         return userRepo.save(user);
     }
 
     public Optional<User> findByUsername(String username){
-        return userRepo.save(username);
+        return userRepo.findByUsername(username);
     }
 
 }
